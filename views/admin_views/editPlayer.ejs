@@ -1,0 +1,49 @@
+<form class="row g-3" action="" method="post">
+  <div class="col-md-6">
+    <label for="fname" class="form-label">Imie</label>
+    <input
+      value="<%=player.fname%>"
+      class="form-control <%-errors?.errors?.fname? 'is-invalid':''%>"
+      type="text"
+      name="fname"
+      id="fname"
+    />
+    <%if(errors?.errors?.fname ){%>
+    <div class="invalid-feedback">Podaj imie</div>
+    <%}%>
+  </div>
+  <div class="col-md-6">
+    <label for="lname" class="form-label">Nazwisko</label>
+    <input
+      value="<%=player.lname%>"
+      class="form-control <%-errors?.errors?.lname? 'is-invalid':''%>"
+      type="text"
+      name="lname"
+      id="lname"
+    />
+    <%if(errors?.errors?.lname ){%>
+    <div class="invalid-feedback">Podaj nazwisko</div>
+    <%}%>
+  </div>
+  <div class="col-md-6">
+    <label for="date" class="form-label">Data urodzenia</label>
+    <input
+      value="<%=player.birthdate%>"
+      class="form-control"
+      type="date"
+      name="date"
+      id="date"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="team" class="form-label">Drużyna</label>
+    <select class="form-select" name="teamId" id="team">
+      <option value="<%=player.teamId%>" selected><%=player.teamId%></option>
+      <% teams.forEach(teams =>{ %>
+      <option value="<%=teams._id%>"><%=teams.name%></option>
+      <%});%>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Zapisz</button>
+</form>
+<%- include ('../partials/messages') %>

@@ -1,0 +1,74 @@
+.logoMatch {
+  text-align: center;
+  height: 50%;
+}
+.logoTeamEvent {
+  width: 30%;
+  height: 50%;
+  text-align: center;
+}
+.match {
+  position: relative;
+  background-color: rgb(95, 138, 163);
+  text-align: center;
+}
+.matchNames {
+  position: relative;
+  vertical-align: middle;
+
+  font-size: 150%;
+}
+.matchGoal {
+  display: block;
+}
+.matchYellowCard {
+  display: block;
+}
+.matchRedCard {
+  display: block;
+}
+.matchYellowCard img {
+  height: 20px;
+  width: 20px;
+}
+
+.matchRedCard img {
+  height: 20px;
+  width: 20px;
+}
+.matchGoal img {
+  height: 20px;
+  width: 20px;
+}
+.shootersLead {
+  padding: 0px 0px 0px 0px;
+}
+.eventList {
+  text-align: center;
+  padding: 0px 0px 0px 0px;
+}
+.homeTable {
+  padding: 0px 30px 0px 0px;
+}
+.matchTable {
+  padding: 0px 0px 0px 0px;
+}
+.teamDetails {
+  padding: 0px 0px 0px 0px;
+}
+.teamDetailsName {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 40px;
+  padding: 0 0 0 0;
+}
+
+.teamDetailsLogo {
+  padding: 0 0 0 0;
+}
+
+@media screen and (max-width: 992px) {
+  .homeTable {
+    padding: 0px 0px 0px 0px;
+  }
+}

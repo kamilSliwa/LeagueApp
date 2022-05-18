@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12">
+    <form action="/matchs/<%-match.id%>/edytuj" method="post">
+      <div class="col-md-6">
+        <label for="homeGoals" class="form-label">Bramki gospodarzy</label>
+        <input
+          class="form-control"
+          type="text"
+          name="homeGoals"
+          id="homeGoals"
+        />
+
+        <label for="homeGoals" class="form-label">Bramki gości</label>
+        <input
+          class="form-control"
+          type="text"
+          name="awayGoals"
+          id="awayGoals"
+        />
+      </div>
+
+      <div>
+        <label for="round">Runda</label>
+        <input
+          type="text"
+          id="round"
+          name="round"
+          value="<%=match.round%>"
+          class="form-control <%-errors?.errors?.round? 'is-invalid':''%>"
+        />
+        <%if(errors?.errors?.round ){%>
+        <div class="invalid-feedback">Pole runda nie może być pusta</div>
+        <%}%>
+      </div>
+      <label for="date">Data</label>
+      <input
+        type="datetime-local"
+        name="date"
+        id="date"
+        class="form-label <%-errors?.errors?.date? 'is-invalid':''%>"
+      />
+
+      <%if(errors?.errors?.date ){%>
+      <div class="invalid-feedback">Podaj prawidłowa date</div>
+      <%}%>
+      <button class="btn btn-primary" type="submit">Dodaj</button>
+    </form>
+  </div>
+</div>

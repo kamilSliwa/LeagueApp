@@ -1,0 +1,52 @@
+<div class="row">
+<% if(logged==true){%>
+<form action="/addTeam" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label  class="form-label" for="name">Nazwa druzyny</label>
+        <input class="form-control <%-errors?.errors?.name? 'is-invalid':''%>" id="name" name="name">
+        <%if(errors?.errors?.name ){%>
+            <div class="invalid-feedback">Podaj prawidłowa nazwe</div>
+            <%}%>
+
+
+        <label  class="form-label" for="since">Data powstania</label>
+        <input class="form-control <%-errors?.errors?.since? 'is-invalid':''%>" type="text" id="since" name="since">
+        <%if(errors?.errors?.since){%>
+            <div class="invalid-feedback">Podaj prawidłowa date</div>
+            <%}%>
+
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Herb</label>
+                <input type="file" name="image" class="form-control" id="image">
+            </div>
+        <button class="btn btn-secondary" type="submit">Dodaj team</button>
+   
+</form>
+<%}%> 
+<div>
+<h1>Druzyny</h1>
+<table class="table">
+    <thead>
+      <tr class="table-primary">
+        </tr>
+    </thead>
+
+<% teams.forEach(teams =>{ %>
+    <tbody>
+        <tr>
+          
+          <td scope="row" > <img src="/static/uploads/<%- teams.logo %>" width="25" height="25"></td>
+         <td scope="row" > <a href="teams/<%= teams._id %>"><%=teams.name%></a></td>
+       <% if(logged==true){%>
+        <td>  <a href="/teams/<%=teams._id%>/edytuj"
+                class="btn btn-success btn-sm " tabindex="-1" role="button" >Edytuj</a></td>
+        <td> <a href="/teams/<%=teams._id%>/usun"  
+                class="btn btn-danger btn-sm " tabindex="-1" role="button" >Usun</a></td>
+        <%}%>
+ </tr>
+</tbody>
+    <%});%>
+</div>
+
+</div>

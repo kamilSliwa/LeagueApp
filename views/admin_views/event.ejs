@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-6 logoMatch">
+    <img class="logoTeamEvent" src="/static/uploads/<%- homeTeam.logo %>" />
+  </div>
+  <div class="col-6 logoMatch">
+    <img class="logoTeamEvent" src="/static/uploads/<%- awayTeam.logo %>" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-5 match">
+    <span class="matchNames"><%=homeTeam.name%></span>
+  </div>
+  <div class="col-2 match">
+    <span class="matchNames"><%=match.getScore()%></span>
+  </div>
+  <div class="col-5 match">
+    <span class="matchNames"><%=awayTeam.name%></span>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Home Team -->
+  <div class="col-5">
+    <ul class="eventList">
+      <%homeEvents.forEach(event =>{%> <% if (match._id==event.matchId) { %>
+      <%if(event.event=='goal'){ %>
+
+      <li class="matchGoal">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Football_%28soccer_ball%29.svg"
+        /><%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+        <%}%>
+      </li>
+      <%} else if (event.event=='yelowCard'){ %>
+      <li class="matchYellowCard">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Yellow_card.svg/184px-Yellow_card.svg.png"
+        />
+
+        <%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+        <%}%>
+      </li>
+      <%}else{ %>
+      <li class="matchRedCard">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Red_card.svg"
+        />
+        <%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+        <%}%>
+      </li>
+
+      <% } %> <%}%> <%});%>
+    </ul>
+  </div>
+  <!-- Away Team -->
+  <div class="col-2"></div>
+  <div class="col-5">
+    <ul class="eventList">
+      <% awayEvents.forEach(event =>{%> <% if (match._id==event.matchId) { %>
+      <%if(event.event=='goal'){ %>
+
+      <li class="matchGoal">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Football_%28soccer_ball%29.svg"
+        /><%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+        <%}%>
+      </li>
+      <%} else if (event.event=='yelowCard'){ %>
+
+      <li class="matchYellowCard">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Yellow_card.svg/184px-Yellow_card.svg.png"
+        />
+        <%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+
+        <%}%>
+      </li>
+
+      <%}else{ %>
+      <li class="matchRedCard">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Red_card.svg"
+        />
+
+        <%=event.event%> <%=event.playerName%> <% if(logged==true){%>
+        <a href="/deleteEvent/<%-event._id%>"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg"
+            alt=""
+            srcset=""
+        /></a>
+        <%}%>
+      </li>
+
+      <% } %> <%}%> <%});%>
+    </ul>
+  </div>
+  <% if(logged==true){%>
+</div>
+<div class="col-xs-4">
+  <form action="/addEvent/<%=matchId%>" method="post" class="position-relative">
+    <input type="hidden" name="match" id="player" value="<%=matchId%>" />
+    <label for="player">Wybierz zawodnika</label>
+    <select class="form-select" name="player">
+      <% listPlayers.forEach(players =>{ %>
+      <option value="<%=players._id%>"><%=players.fname%></option>
+
+      <%}) %></select
+    ><label for="event">Wybierz zdarzenie</label>
+    <select class="form-select" id="event" name="event">
+      <option value="">--Please choose an option--</option>
+      <option value="goal">Goal</option>
+      <option value="yelowCard">Yelow Card</option>
+      <option value="redCard">Red Card</option>
+    </select>
+
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+
+    <%}%>
+  </form>
+</div>

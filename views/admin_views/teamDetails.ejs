@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-2 teamDetailsLogo">
+    <img src="/static/uploads/<%- team.logo %>" width="100" height="100" />
+  </div>
+  <div class="col-10 teamDetailsName"><%=team.name%></div>
+</div>
+
+<div class="row">
+  <div class="col-12 teamDetails">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Imie</th>
+          <th scope="col">Gole</th>
+          <th scope="col">Żółte kartki</th>
+          <th scope="col">Czerwone kartki</th>
+          <% if(logged==true){%>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <%}%>
+        </tr>
+      </thead>
+      <% players.forEach(player =>{ %>
+      <tr>
+        <td>
+          <a href="/player/<%= player._id %>"
+            ><%=player.fname%> <%=player.lname%></a
+          >
+        </td>
+        <td><%=player.goals%></td>
+        <td><%=player.yellowCards%></td>
+        <td><%=player.redCards%></td>
+
+        <% if(logged==true){%>
+        <td>
+          <a
+            href="/player/<%=player._id%>/edytuj"
+            class="btn btn-success btn-sm"
+            tabindex="-1"
+            role="button"
+            >Edytuj</a
+          >
+        </td>
+        <td>
+          <a
+            href="/player/<%=player._id%>/usun"
+            class="btn btn-danger btn-sm"
+            tabindex="-1"
+            role="button"
+            >Usuń</a
+          >
+        </td>
+      </tr>
+
+      <%}%> <%});%>
+    </table>
+  </div>
+  <div class="col-12">
+    <% if(logged==true){%>
+    <a href="/<%=team._id%>/addPlayer" class="btn btn-success"
+      >Dodaj zawodnika</a
+    >
+    <%}%>
+  </div>
+</div>

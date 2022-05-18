@@ -1,0 +1,21 @@
+<form action="/teams/<%-team._id%>/edytuj" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label  class="form-label" for="name">Nazwa druzyny</label>
+        <input value="<%=team.name%>" class="form-control <%-errors?.errors?.name? 'is-invalid':''%>" id="name" name="name">
+        <%if(errors?.errors?.name ){%>
+            <div class="invalid-feedback">Podaj prawidłowa nazwe</div>
+            <%}%>
+
+
+        <label  class="form-label" for="since">Data powstania</label>
+        <input value="<%=team.since%>" class="form-control <%-errors?.errors?.since? 'is-invalid':''%>" type="text" id="since" name="since">
+        <label for="image" class="form-label">Herb</label>
+        <input type="file" name="image" class="form-control" id="image">
+        
+        <%if(errors?.errors?.since){%>
+            <div class="invalid-feedback">Podaj prawidłowa date</div>
+            <%}%>
+            
+        <button class="btn btn-primary" type="submit">Zapisz team</button>
+   
+</form>

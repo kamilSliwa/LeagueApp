@@ -1,0 +1,47 @@
+<% rounds.forEach(round =>{ %>
+<div class="row">
+  <div class="col-12 matchTable">
+    <table class="table">
+      <div class="alert alert-primary machTable">Kolejka <%=round%></div>
+      <% match.forEach(match =>{ %> <% if(round==match.round){%>
+      <tbody>
+        <tr>
+          <td><%=match.homeTeam%></td>
+          <td><%=match.homeGoals%>-<%=match.awayGoals%></td>
+          <td><%=match.awayTeam%></td>
+          <td><%=match.date.toDateString()%></td>
+
+          <td>
+            <a
+              href="/matchs/<%=match._id%>/zdarzenie"
+              class="btn btn-primary btn-sm"
+              tabindex="-1"
+              role="button"
+              >Centrum meczowe</a
+            >
+
+            <% if(logged==true){%>
+            <a
+              href="/matchs/<%=match._id%>/edytuj"
+              class="btn btn-success btn-sm"
+              tabindex="-1"
+              role="button"
+              >Edytuj</a
+            >
+
+            <a
+              href="/matchs/<%=match._id%>/usun"
+              class="btn btn-danger btn-sm"
+              tabindex="-1"
+              role="button"
+              >Usun</a
+            >
+
+            <%}%>
+          </td>
+        </tr>
+      </tbody>
+      <%}%> <%});%> <%});%>
+    </table>
+  </div>
+</div>
