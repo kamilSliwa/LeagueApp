@@ -28,8 +28,6 @@ router.get("/", async (req, res) => {
     }
   });
 
-  console.log(top10);
-
   for (let j = 0; j < player.length; j++) {
     let counter = 0;
     for (let i = 0; i < top10.length; i++) {
@@ -43,10 +41,6 @@ router.get("/", async (req, res) => {
   sortByGoals.sort(function (a, b) {
     return b.goals - a.goals;
   });
-  console.log(sortByGoals);
-  for (let j = 0; j < sortByGoals.length; j++) {
-    console.log(sortByGoals[j].fname, sortByGoals[j].goals);
-  }
 
   for (i = 0; i < match.length; i++) {
     const homeTeam = teams.find((element) => element._id == match[i].homeTeam);
@@ -125,6 +119,4 @@ router.get("/", async (req, res) => {
   res.render("home", { match, teams, byPoints, events, rounds, sortByGoals });
 });
 
-//najlepszi strzelcy
-//tabela
 module.exports = router;
