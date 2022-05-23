@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
     errors.push({ msg: "Password do not match" });
   }
 
-  if (password.lenth < 1) {
+  if (password.length < 1) {
     errors.push({ msg: "short password" });
   }
   if (errors.length > 0) {
@@ -79,7 +79,7 @@ router.post("/register", async (req, res) => {
         });
         console.log(newUser);
 
-        //Password Hasihing
+        //Password hash
         bcrypt.genSalt(10, (e, salt) =>
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;

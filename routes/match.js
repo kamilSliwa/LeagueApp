@@ -89,13 +89,13 @@ router.get("/matchs", async (req, res) => {
   res.render("admin_views/match", { match, teams, byPoints, events, rounds });
 });
 
-router.get("/addMatch", async (req, res) => {
+router.get("/addMatch", ensureAuthenticated, async (req, res) => {
   const teams = await Team.find({});
 
   res.render("admin_views/addMatch", { teams });
 });
 
-router.post("/addMatch", async (req, res) => {
+router.post("/addMatch", ensureAuthenticated, async (req, res) => {
   const teams = await Team.find({});
 
   const match = new Match({
@@ -119,7 +119,7 @@ router.post("/addMatch", async (req, res) => {
   }
 });
 
-router.get("/matchs/:id/edytuj", async (req, res) => {
+router.get("/matchs/:id/edytuj", ensureAuthenticated, async (req, res) => {
   const id = req.params.id;
   const match = await Match.findOne({ _id: id });
 
@@ -128,7 +128,7 @@ router.get("/matchs/:id/edytuj", async (req, res) => {
   res.render("admin_views/editMatch", { match, teams, form: req.body });
 });
 
-router.post("/matchs/:id/edytuj", async (req, res) => {
+router.post("/matchs/:id/edytuj", ensureAuthenticated, async (req, res) => {
   const id = req.params.id;
   const match = await Match.findOne({ _id: id });
   const teams = await Team.find();
@@ -144,7 +144,7 @@ router.post("/matchs/:id/edytuj", async (req, res) => {
   }
 });
 
-router.get("/matchs/:id/usun", async (req, res) => {
+router.get("/matchs/:id/usun", ensureAuthenticated, async (req, res) => {
   try {
     await Match.deleteOne({ _id: req.params.id });
   } catch (e) {
@@ -198,7 +198,7 @@ router.get("/matchs/:id/zdarzenie", async (req, res) => {
     teams,
   });
 });
-router.post("/addEvent/:id", async (req, res) => {
+router.post("/addEvent/:id", ensureAuthenticated, async (req, res) => {
   const event = new EventMatch({
     matchId: req.body.match,
     playerId: req.body.player,
@@ -211,7 +211,7 @@ router.post("/addEvent/:id", async (req, res) => {
     res.redirect("/matchs/" + req.params.id + "/zdarzenie");
   }
 });
-router.get("/deleteEvent/:id", async (req, res) => {
+router.get("/deleteEvent/:id", ensureAuthenticated, async (req, res) => {
   const event = await EventMatch.findById({ _id: req.params.id });
 
   await EventMatch.deleteOne({ _id: req.params.id });

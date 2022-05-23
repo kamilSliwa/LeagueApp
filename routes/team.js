@@ -15,23 +15,28 @@ router.get("/teams", async (req, res) => {
   res.render("admin_views/team", { teams });
 });
 
-router.post("/addTeam", upload.single("image"), async (req, res) => {
-  const teams = await Team.find({});
+router.post(
+  "/addTeam",
+  ensureAuthenticated,
+  upload.single("image"),
+  async (req, res) => {
+    const teams = await Team.find({});
 
-  const team = new Team();
-  team.name = req.body.name;
-  team.since = req.body.since;
-  if (req.file != undefined) {
-    team.logo = req.file.filename;
-  }
+    const team = new Team();
+    team.name = req.body.name;
+    team.since = req.body.since;
+    if (req.file != undefined) {
+      team.logo = req.file.filename;
+    }
 
-  try {
-    await team.save();
-    res.redirect("/teams");
-  } catch (e) {
-    res.render("admin_views/team", { teams, errors: e });
+    try {
+      await team.save();
+      res.redirect("/teams");
+    } catch (e) {
+      res.render("admin_views/team", { teams, errors: e });
+    }
   }
-});
+);
 router.get("/teams/:id", async (req, res) => {
   const team = await Team.findById({ _id: req.params.id });
   const teams = await Team.find({});

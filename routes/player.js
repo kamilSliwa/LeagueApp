@@ -14,7 +14,7 @@ router.get("/:id/addPlayer/", async (req, res) => {
   res.render("admin_views/addPlayer", { teams });
 });
 
-router.post("/addPlayer", async (req, res) => {
+router.post("/addPlayer", ensureAuthenticated, async (req, res) => {
   const teams = await Team.find({});
   const player = new Player({
     fname: req.body.fname,
@@ -30,7 +30,7 @@ router.post("/addPlayer", async (req, res) => {
   }
 });
 
-router.get("/player/:id/usun", async (req, res) => {
+router.get("/player/:id/usun", ensureAuthenticated, async (req, res) => {
   const player = await Player.findById({ _id: req.params.id });
   const idTeam = await Team.findById({ _id: player.teamId.valueOf() });
   await Player.deleteOne({ _id: req.params.id });
@@ -46,13 +46,13 @@ router.get("/player/:id", async (req, res) => {
   });
 });
 
-router.get("/player/:id/edytuj", async (req, res) => {
+router.get("/player/:id/edytuj", ensureAuthenticated, async (req, res) => {
   const teams = await Team.find({});
   const player = await Player.findById({ _id: req.params.id });
   res.render("admin_views/editPlayer", { teams, player });
 });
 
-router.post("/player/:id/edytuj", async (req, res) => {
+router.post("/player/:id/edytuj", ensureAuthenticated, async (req, res) => {
   const teams = await Team.find({});
   const player = await Player.findById({ _id: req.params.id });
 
